@@ -7,7 +7,8 @@
   <version>1.0-SNAPSHOT</version>
   <name>shop Maven Webapp</name>
   <url>http://maven.apache.org</url>
-  <dependencies>
+
+    <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -15,24 +16,24 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- 日志依赖 -->
-    <dependency>
-      <groupId>slf4j-api</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.12</version>
-    </dependency>
+    <!--&lt;!&ndash; 日志依赖 &ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>slf4j-api</groupId>-->
+      <!--<artifactId>slf4j-api</artifactId>-->
+      <!--<version>1.7.12</version>-->
+    <!--</dependency>-->
 
-    <dependency>
-      <groupId>logback-core</groupId>
-      <artifactId>logback-core</artifactId>
-      <version>1.1.1</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>logback-core</groupId>-->
+      <!--<artifactId>logback-core</artifactId>-->
+      <!--<version>1.1.1</version>-->
+    <!--</dependency>-->
 
-    <dependency>
-      <groupId>logback-classic</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.1.1</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>logback-classic</groupId>-->
+      <!--<artifactId>logback-classic</artifactId>-->
+      <!--<version>1.1.1</version>-->
+    <!--</dependency>-->
 
     <!--  数据库相关依赖-->
     <dependency>
@@ -55,87 +56,98 @@
       <version>3.3.0</version>
     </dependency>
 
+      <dependency>
+          <groupId>org.mybatis.generator</groupId>
+          <artifactId>mybatis-generator-core</artifactId>
+          <version>1.3.5</version>
+      </dependency>
+
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
       <version>1.2.3</version>
     </dependency>
 
-    <!-- servelt web依赖 -->
-    <dependency>
-      <groupId>taglibs</groupId>
-      <artifactId>standard</artifactId>
-      <version>1.1.2</version>
-    </dependency>
+    <!--&lt;!&ndash; servelt web依赖 &ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>taglibs</groupId>-->
+      <!--<artifactId>standard</artifactId>-->
+      <!--<version>1.1.2</version>-->
+    <!--</dependency>-->
 
-    <dependency>
-      <groupId>jstl</groupId>
-      <artifactId>jstl</artifactId>
-      <version>1.2</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>jstl</groupId>-->
+      <!--<artifactId>jstl</artifactId>-->
+      <!--<version>1.2</version>-->
+    <!--</dependency>-->
 
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.5.4</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+      <!--<artifactId>jackson-databind</artifactId>-->
+      <!--<version>2.5.4</version>-->
+    <!--</dependency>-->
 
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>javax.servlet</groupId>-->
+      <!--<artifactId>javax.servlet-api</artifactId>-->
+      <!--<version>3.1.0</version>-->
+    <!--</dependency>-->
 
-    <!-- srping 依赖-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>4.1.7.RELEASE</version>
-    </dependency>
+    <!--&lt;!&ndash; srping 依赖&ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-core</artifactId>-->
+      <!--<version>4.1.7.RELEASE</version>-->
+    <!--</dependency>-->
 
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-beans</artifactId>
-      <version>4.1.7.RELEASE</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-beans</artifactId>-->
+      <!--<version>4.1.7.RELEASE</version>-->
+    <!--</dependency>-->
 
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>4.1.7.RELEASE</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-context</artifactId>-->
+      <!--<version>4.1.7.RELEASE</version>-->
+    <!--</dependency>-->
 
-    <!-- srping dao层的依赖-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
-      <version>4.1.7.RELEASE</version>
-    </dependency>
+    <!--&lt;!&ndash; srping dao层的依赖&ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-jdbc</artifactId>-->
+      <!--<version>4.1.7.RELEASE</version>-->
+    <!--</dependency>-->
 
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-tx</artifactId>
-      <version>4.1.7.RELEASE</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-tx</artifactId>-->
+      <!--<version>4.1.7.RELEASE</version>-->
+    <!--</dependency>-->
 
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
-      <version>4.1.7.RELEASE</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-web</artifactId>-->
+      <!--<version>4.1.7.RELEASE</version>-->
+    <!--</dependency>-->
 
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
-      <version>4.1.7.RELEASE</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-webmvc</artifactId>-->
+      <!--<version>4.1.7.RELEASE</version>-->
+    <!--</dependency>-->
 
-    <!-- sprign text依赖-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-      <version>4.1.7.RELEASE</version>
-    </dependency>
+    <!--&lt;!&ndash; sprign text依赖&ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-test</artifactId>-->
+      <!--<version>4.1.7.RELEASE</version>-->
+    <!--</dependency>-->
+      <!--<dependency>-->
+          <!--<groupId>org.codehaus.plexus</groupId>-->
+          <!--<artifactId>plexus-container-default</artifactId>-->
+          <!--<version>1.5.5</version>-->
+      <!--</dependency>-->
 
 
   </dependencies>
