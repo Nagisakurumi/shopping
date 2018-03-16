@@ -6,6 +6,10 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://115.217.253.139:8888/mall?autoReconnect=true
+    url: jdbc:mysql://127.0.0.1:3306/mall?autoReconnect=true
                       &useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&
                       failOverReadOnly=false
+server:
+  port: 8082
+  servlet:
+    context-path: /shop

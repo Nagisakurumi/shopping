@@ -38,17 +38,17 @@ public class AddressMapperTest {
 
     @Test
     public void insert() {
-//        Address address = new Address();
-//        address.setUserId((long)0);
-//        address.setConsignee("梅精翔");
-//        address.setMobile("18368404781");
-//        address.setProvice("中国");
-//        address.setCity("杭州");
-//        address.setTown("滨江");
-//        address.setAddress("青松宜家");
-//        address.setIsdefault(new byte[]{1});
-//
-//        addressMapper.insert(address);
+        Address address = new Address();
+        address.setUserId((long)0);
+        address.setConsignee("梅精翔");
+        address.setMobile("18368404781");
+        address.setProvice("中国");
+        address.setCity("杭州");
+        address.setTown("滨江");
+        address.setAddress("青松宜家");
+        address.setIsdefault(new byte[]{1});
+
+        addressMapper.insert(address);
     }
 
     @Test
