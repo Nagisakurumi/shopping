@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Implementation-Title: shop
-Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: Kurumi
-Implementation-Vendor-Id: com.xx
-Created-By: IntelliJ IDEA
-Build-Jdk: 1.8.0_144
-Main-Class: ${start-class}
-

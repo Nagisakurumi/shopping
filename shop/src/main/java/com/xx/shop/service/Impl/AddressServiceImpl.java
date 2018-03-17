@@ -5,9 +5,11 @@ import com.xx.shop.entity.Address;
 import com.xx.shop.entity.AddressExample;
 import com.xx.shop.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AddressServiceImpl implements AddressService {
     @Autowired
     private AddressMapper addressMapper;

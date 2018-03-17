@@ -11,7 +11,7 @@
 
 	<!-- 在MBG工作的时候，需要额外加载的依赖包 location属性指明加载jar/zip包的全路径 -->
 	<classPathEntry
-		location="X:\Tools\mvean\apache-maven-3.5.3\repository\mysql\mysql-connector-java\5.1.45\mysql-connector-java-5.1.45.jar" />
+		location="I:\Project\java\repository\mysql\mysql-connector-java\5.1.45\mysql-connector-java-5.1.45.jar" />
 		<!--location="/Users/circle/dev/repo/mysql/mysql-connector-java/5.1.35/mysql-connector-java-5.1.35.jar" />-->
 
 
@@ -41,7 +41,7 @@
 		<!-- <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" /> -->
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://115.217.253.139:8888/mall?autoReconnect=true
+			connectionURL="jdbc:mysql://127.0.0.1:3306/mall?autoReconnect=true
              &amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;autoReconnect=true&amp;
              failOverReadOnly=false" userId="root"
 			password="123456">
