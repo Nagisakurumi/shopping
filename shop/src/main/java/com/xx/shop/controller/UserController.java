@@ -1,6 +1,7 @@
 package com.xx.shop.controller;
 
 
+import com.xx.shop.ResultModel.ResultMap;
 import com.xx.shop.entity.UserInfo;
 import com.xx.shop.service.MailService;
 import com.xx.shop.service.UserInfoService;
@@ -50,7 +51,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Map<String, Object> login(HttpSession session, String username, String password){
+    public ResultMap login(HttpSession session, String username, String password){
         if(userInfoService.isSureUser(username, password) == true){
             session.setAttribute(userSessionName,username);
             return getReturnMap(true, "", null);
@@ -65,7 +66,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/islogin", method = RequestMethod.GET)
-    public Map<String, Object> isLogin(HttpSession session){
+    public ResultMap isLogin(HttpSession session){
         if(session.getAttribute(userSessionName) == null){
             return getReturnMap(true, "", null);
         }else{
@@ -78,7 +79,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/regist", method = RequestMethod.POST)
-    public Map<String, Object> regist(String username, String password, String email, String handimage, String nickName
+    public ResultMap regist(String username, String password, String email, String handimage, String nickName
  ,String phone){
         UserInfo otherinfo = userInfoService.getUserByUserName(username);
         if(otherinfo == null){
@@ -102,7 +103,7 @@ public class UserController {
     }
 
     @RequestMapping(value="/sendmail", method = RequestMethod.POST)
-    public Map<String, Object> sendMail(HttpSession session, String username){
+    public ResultMap sendMail(HttpSession session, String username){
         String usn = null;
         usn = (String) session.getAttribute(userSessionName);
         usn = usn == null ? username : usn;
@@ -117,7 +118,7 @@ public class UserController {
     }
 
     @RequestMapping(value="/sendmailtest", method = RequestMethod.GET)
-    public Map<String, Object> sendMailTest(String email){
+    public ResultMap vendMailTest(String email){
         mailService.send(email, "测试邮件", "收到内容了吗");
         return getReturnMap(true, "", null);
     }
@@ -127,7 +128,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/verify", method = RequestMethod.GET)
-    public Map<String, Object> verifyMail(HttpSession session, String username) throws ParseException {
+    public ResultMap verifyMail(HttpSession session, String username) throws ParseException {
         Date now = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = (String)session.getAttribute("time");
@@ -152,7 +153,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/getuserinfo", method = RequestMethod.POST)
-    public Map<String, Object> getUserInfo(HttpSession session, String username){
+    public ResultMap getUserInfo(HttpSession session, String username){
         UserInfo userInfo = userInfoService.getUserByUserName(username);
         userInfo.setPassword("*********");
         return getReturnMap(true, "", userInfo);
@@ -167,11 +168,7 @@ public class UserController {
      * @param data
      * @return
      */
-    private Map<String, Object> getReturnMap(boolean stuta, String msg, Object data){
-        Map<String, Object> model = new HashMap<>();
-        model.put("success", stuta);
-        model.put("msg", msg);
-        model.put("data", data);
-        return model;
+    private ResultMap getReturnMap(boolean stuta, String msg, Object data){
+        return ResultMap.getResultMap(stuta, msg, data);
     }
 }
