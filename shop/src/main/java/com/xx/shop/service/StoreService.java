@@ -35,4 +35,12 @@ public interface StoreService {
      * @return
      */
     public List<Store> getStoreByHonesties(boolean isup, int startindex, int length);
+
+    /**
+     * 修改店铺信息
+     * @param storeName
+     * @param logoimage
+     * @param describtion
+     */
+    public boolean midifyStoreInfo(String storeName, String newstorename, String logoimage, String describtion);
 }

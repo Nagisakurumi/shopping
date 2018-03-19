@@ -165,4 +165,7 @@ public class UserController {
     private ResultMap getReturnMap(boolean stuta, String msg, Object data){
         return ResultMap.getResultMap(stuta, msg, data);
     }
+
+
+
 }

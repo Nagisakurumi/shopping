@@ -55,4 +55,18 @@ public interface UserInfoService {
      * @param newpassword
      */
     void modifyPassword(String username, String newpassword);
+
+    /**
+     * 获取随机生成的验证码
+     * @return key
+     */
+    String getVerifyImage();
+
+    /**
+     * 验证key所对应的value值是否正确
+     * @param key
+     * @param value
+     * @return
+     */
+    boolean verifyValue(String key, String value);
 }

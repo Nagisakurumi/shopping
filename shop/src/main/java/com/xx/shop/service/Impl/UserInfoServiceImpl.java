@@ -67,4 +67,14 @@ public class UserInfoServiceImpl  implements UserInfoService{
         userInfo.setPassword(newpassword);
         userInfoMapper.updateByPrimaryKey(userInfo);
     }
+
+    @Override
+    public String getVerifyImage() {
+        return null;
+    }
+
+    @Override
+    public boolean verifyValue(String key, String value) {
+        return false;
+    }
 }

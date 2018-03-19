@@ -19,6 +19,11 @@ public class StoreServiceImpl implements   StoreService {
 
     @Override
     public boolean addStore(String storeName, String logoimage, String describtion) {
+
+        if(getStoreByName(storeName) != null){
+            return false;
+        }
+
         Store store = new Store();
         store.setStoreName(storeName);
         store.setLogo(logoimage);
@@ -52,5 +57,21 @@ public class StoreServiceImpl implements   StoreService {
         StoreExample storeExample = new StoreExample();
         storeExample.setOrderByClause("honesties " +  (isup ? "ASC" : "desc"));
         return storeMapper.selectByExample(storeExample);
+    }
+
+    @Override
+    public boolean midifyStoreInfo(String storeName, String newstorename, String logoimage, String describtion) {
+        if(getStoreByName(newstorename) != null){
+            return false;
+        }
+        if(getStoreByName(storeName) == null){
+            return false;
+        }
+        Store store = getStoreByName(storeName);
+        store.setStoreName(newstorename);
+        store.setLogo(logoimage);
+        store.setDescribtion(describtion);
+        storeMapper.updateByPrimaryKey(store);
+        return true;
     }
 }
