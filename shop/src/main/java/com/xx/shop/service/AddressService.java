@@ -1,7 +1,5 @@
 package com.xx.shop.service;
 
-import com.xx.shop.entity.Address;
-
 import java.util.List;
 
 public interface AddressService {

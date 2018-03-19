@@ -1,8 +1,6 @@
 package com.xx.shop.service.Impl;
 
 import com.xx.shop.dao.AddressMapper;
-import com.xx.shop.entity.Address;
-import com.xx.shop.entity.AddressExample;
 import com.xx.shop.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

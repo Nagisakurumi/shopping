@@ -41,7 +41,7 @@
 		<!-- <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" /> -->
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://127.0.0.1:3306/mall?autoReconnect=true
+			connectionURL="jdbc:mysql://192.168.0.101:3306/mall?autoReconnect=true
              &amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;autoReconnect=true&amp;
              failOverReadOnly=false" userId="root"
 			password="123456">
@@ -160,7 +160,7 @@
 						  identity="true" type="post" />
 		</table>
 		<table tableName="t_point_log" domainObjectName="PointLog">
-			<generatedKey column="log_id" sqlStatement="MySql"
+			<generatedKey column="logid" sqlStatement="MySql"
 						  identity="true" type="post" />
 		</table>
 		<table tableName="t_product" domainObjectName="Product">
@@ -168,7 +168,7 @@
 						  identity="true" type="post" />
 		</table>
 		<table tableName="t_product_images" domainObjectName="ProductImages">
-			<generatedKey column="image_id" sqlStatement="MySql"
+			<generatedKey column="img_id" sqlStatement="MySql"
 						  identity="true" type="post" />
 		</table>
 		<table tableName="t_shopcart" domainObjectName="ShopCart">

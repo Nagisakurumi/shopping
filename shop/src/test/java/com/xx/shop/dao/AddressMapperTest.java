@@ -1,16 +1,11 @@
 package com.xx.shop.dao;
 
-import com.xx.shop.entity.Address;
-import org.apache.ibatis.annotations.Mapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static org.junit.Assert.*;
 
 
 @RunWith(SpringRunner.class)

@@ -1,7 +1,5 @@
 package com.xx.shop.service;
 
-import com.xx.shop.entity.Store;
-
 import java.util.List;
 
 public interface StoreService {

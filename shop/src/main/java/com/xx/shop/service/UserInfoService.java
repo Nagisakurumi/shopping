@@ -1,8 +1,5 @@
 package com.xx.shop.service;
 
-import com.xx.shop.entity.UserInfo;
-import org.apache.catalina.User;
-
 public interface UserInfoService {
 
     /**

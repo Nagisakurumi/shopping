@@ -2,24 +2,17 @@ package com.xx.shop.controller;
 
 
 import com.xx.shop.ResultModel.ResultMap;
-import com.xx.shop.entity.UserInfo;
 import com.xx.shop.service.MailService;
 import com.xx.shop.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.print.attribute.standard.Media;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
