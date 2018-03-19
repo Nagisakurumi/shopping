@@ -2,6 +2,8 @@ package com.xx.shop.service.Impl;
 
 import com.github.pagehelper.PageHelper;
 import com.xx.shop.dao.StoreMapper;
+import com.xx.shop.entity.Store;
+import com.xx.shop.entity.StoreExample;
 import com.xx.shop.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

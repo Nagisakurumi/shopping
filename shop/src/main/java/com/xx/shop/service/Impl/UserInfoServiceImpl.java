@@ -1,6 +1,8 @@
 package com.xx.shop.service.Impl;
 
 import com.xx.shop.dao.UserInfoMapper;
+import com.xx.shop.entity.UserInfo;
+import com.xx.shop.entity.UserInfoExample;
 import com.xx.shop.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

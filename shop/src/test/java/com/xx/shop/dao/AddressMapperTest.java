@@ -1,5 +1,6 @@
 package com.xx.shop.dao;
 
+import com.xx.shop.entity.Address;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +42,7 @@ public class AddressMapperTest {
         address.setCity("杭州");
         address.setTown("滨江");
         address.setAddress("青松宜家");
-        address.setIsdefault(new byte[]{1});
+        address.setIsdefault(1);
 
         addressMapper.insert(address);
     }

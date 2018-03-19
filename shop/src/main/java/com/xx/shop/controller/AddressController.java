@@ -1,6 +1,7 @@
 package com.xx.shop.controller;
 
 import com.xx.shop.common.ReturnHelper;
+import com.xx.shop.entity.Address;
 import com.xx.shop.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

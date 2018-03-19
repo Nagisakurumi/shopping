@@ -2,6 +2,7 @@ package com.xx.shop.controller;
 
 
 import com.xx.shop.ResultModel.ResultMap;
+import com.xx.shop.entity.UserInfo;
 import com.xx.shop.service.MailService;
 import com.xx.shop.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
