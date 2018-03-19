@@ -15,3 +15,26 @@ function login(){
         }
     });
 }
+
+function getAddList(userId){
+    $.ajax({
+        type:"GET",
+        url: "http://127.0.0.1:8082/shop/address/getaddresslist",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        data:{"userId": userId},
+        success : function (map) {
+            alert(map["success"]);
+        },
+        error :function(e){
+
+        }
+    });
+}
+
+$(document).ready(
+    function () {
+        alert("dd");
+        getAddList(1);
+    }
+);

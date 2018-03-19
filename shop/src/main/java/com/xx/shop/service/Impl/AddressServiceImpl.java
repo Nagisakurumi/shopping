@@ -7,6 +7,7 @@ import com.xx.shop.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -29,18 +30,29 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-     public boolean updateAddress(Address address)throws Exception {
-        try {
-            int i = addressMapper.updateByPrimaryKey(address);
-            if (i > 0) {
-                return true;
-            }else{
-                return false;
-            }
-        }
-        catch(Exception e){
+     public int modifyaddress(Address address){
+//        byte[] bit = {1};
+//        if(address.getIsdefault() == bit){
+//            modifyDefault();
+//        }
+        return addressMapper.updateByPrimaryKey(address);
 
-            throw new Exception(e);
-        }
+
+    }
+
+    private void modifyDefault() {
+//        AddressExample addressExample = new AddressExample();
+//        AddressExample.Criteria criteria = addressExample.createCriteria();
+//        criteria.
+    }
+
+    @Override
+    public int deleteAddress(String ids) {
+            String[] id = ids.split(",");
+            List idList  = Arrays.asList(id);//字符数组转list
+            AddressExample addressExample = new AddressExample();
+            AddressExample.Criteria criteria = addressExample.createCriteria();
+            criteria.andAddressIdIn(idList);
+            return addressMapper.deleteByExample(addressExample);
     }
 }
