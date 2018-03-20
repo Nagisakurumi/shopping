@@ -1,5 +1,6 @@
 package com.xx.shop.controller;
 
+import com.xx.shop.ResultModel.ResultMap;
 import com.xx.shop.common.ReturnHelper;
 import com.xx.shop.entity.Address;
 import com.xx.shop.service.AddressService;
@@ -13,6 +14,7 @@ import java.util.Map;
 
 
 @RestController
+@RequestMapping("/address")
 public class AddressController {
     @Autowired
     private AddressService addressService;
@@ -24,8 +26,8 @@ public class AddressController {
      * @return 地址列表
      */
     @RequestMapping(value = "/getaddresslist", method = RequestMethod.GET)
-    public Map<String, Object> getAddressList(Long userId) {
-        return  ReturnHelper.getReturnMap(true,"",addressService.queryAll(userId));
+    public ResultMap getAddressList(Long userId) {
+        return ResultMap.getResultMap(true,"",addressService.queryAll(userId));
     }
 
     /**
@@ -34,19 +36,59 @@ public class AddressController {
      * @return
      */
     @RequestMapping(value = "/{addressId}/getaddressbyid", method = RequestMethod.GET)
-    public Map<String, Object> getAddresById(@PathVariable("addressId") Long addressId) {
-        return  ReturnHelper.getReturnMap(true,"",addressService.getAddresById(addressId));
+    public ResultMap getAddressById(@PathVariable("addressId") Long addressId) {
+        addressService.getAddresById(addressId);
+        return  ResultMap.getResultMap(true,"",null);
     }
 
     /**
-     * 更新地址
+     * 新增地址
+     * @param isdefault
+     * @param consignee
+     * @param mobile
+     * @param provice
+     * @param city
+     * @param town
      * @param address
      * @return
-     * @throws Exception
+     */
+    @RequestMapping(value = "/insertaddress", method = RequestMethod.POST)
+    public ResultMap insertAddress(int isdefault,String consignee,String mobile,String provice,String city,String town ,String address){
+        Address add = new Address();
+        add.setIsdefault(isdefault);
+        add.setConsignee(consignee);
+        add.setMobile(mobile);
+        add.setProvice(provice);
+        add.setCity(city);
+        add.setTown(town);
+        add.setAddress(address);
+        addressService.insertAddress(add);
+        return  ResultMap.getResultMap(true,"",null);
+    }
+
+    /**
+     * 修改地址
+     * @param isdefault
+     * @param consignee
+     * @param mobile
+     * @param provice
+     * @param city
+     * @param town
+     * @param address
+     * @return
      */
     @RequestMapping(value = "/modifyaddress", method = RequestMethod.POST)
-    public int modifyaddress(Address address){
-        return addressService.modifyaddress(address);
+    public ResultMap modifyAddress(int isdefault,String consignee,String mobile,String provice,String city,String town ,String address){
+        Address add = new Address();
+        add.setIsdefault(isdefault);
+        add.setConsignee(consignee);
+        add.setMobile(mobile);
+        add.setProvice(provice);
+        add.setCity(city);
+        add.setTown(town);
+        add.setAddress(address);
+        addressService.modifyaddress(add);
+        return  ResultMap.getResultMap(true,"",null);
     }
 
     /**
@@ -55,12 +97,11 @@ public class AddressController {
      * @return
      */
     @RequestMapping(value = "/deleteaddress", method = RequestMethod.POST)
-    public Map<String,Object> deleteAddress(String ids){
+    public ResultMap deleteAddress(String ids){
         if(ids.isEmpty()){
-            return ReturnHelper.getReturnMap(false,"地址为空","");
+            return ResultMap.getErrorResultMap("地址为空");
         } else{
-            addressService.deleteAddress(ids);
-            return ReturnHelper.getReturnMap(true,"","");
+            return ResultMap.getResultMap(addressService.deleteAddress(ids));
         }
     }
 

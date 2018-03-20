@@ -28,4 +28,43 @@ public class ResultMap {
         resultMap.data = data;
         return resultMap;
     }
+
+    /**
+     *
+     * @param msg
+     * @param data
+     * @return
+     */
+    public static  ResultMap getResultMap(String msg, Object data){
+        ResultMap resultMap = new ResultMap();
+        resultMap.success = true;
+        resultMap.msg = msg;
+        resultMap.data = data;
+        return resultMap;
+    }
+
+    /**
+     *
+     * @param data
+     * @return
+     */
+    public static  ResultMap getResultMap(Object data){
+        ResultMap resultMap = new ResultMap();
+        resultMap.success = true;
+        resultMap.msg = "";
+        resultMap.data = data;
+        return resultMap;
+    }
+    /**
+     * 返回错误信息
+     * @param msg
+     * @return
+     */
+    public static  ResultMap getErrorResultMap(String msg){
+        ResultMap resultMap = new ResultMap();
+        resultMap.success = false;
+        resultMap.msg = msg;
+        resultMap.data = null;
+        return resultMap;
+    }
 }

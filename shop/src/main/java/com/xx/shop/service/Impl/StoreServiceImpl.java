@@ -99,7 +99,7 @@ public class StoreServiceImpl implements   StoreService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public ResultMap deleteStore(long userid) throws Exception {
         UserInfo userInfo =  userInfoService.getUserInfoById(userid);
         if(userInfo == null){

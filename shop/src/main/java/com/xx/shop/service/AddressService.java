@@ -20,6 +20,12 @@ public interface AddressService {
     public Address getAddresById(Long addressId);
 
     /**
+     * 新增地址
+     * @param address
+     * @return
+     */
+    public int insertAddress(Address address);
+    /**
      * 更新地址
      * @param address
      * @return
