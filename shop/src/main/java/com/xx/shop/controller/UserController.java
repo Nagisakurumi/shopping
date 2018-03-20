@@ -6,11 +6,15 @@ import com.xx.shop.entity.UserInfo;
 import com.xx.shop.service.MailService;
 import com.xx.shop.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -88,7 +92,7 @@ public class UserController {
         userInfo.setLevelId(0);
         userInfo.setNickname(nickName);
         userInfo.setPhone(phone);
-        userInfo.setStoreId(0L);
+        userInfo.setStoreId(-1L);
         userInfo.setUpdateTime(new Date());
         userInfo.setUserIntegral(0);
         userInfo.setVerifyMobile((byte)0);
@@ -96,6 +100,12 @@ public class UserController {
         return getReturnMap(true, "", null);
     }
 
+    /**
+     * 发送邮件接口
+     * @param session
+     * @param username
+     * @return
+     */
     @RequestMapping(value="/sendmail", method = RequestMethod.POST)
     public ResultMap sendMail(HttpSession session, String username){
         String usn = null;
@@ -153,8 +163,42 @@ public class UserController {
         return getReturnMap(true, "", userInfo);
     }
 
+    /**
+     * 修改用户头像接口
+     * @param file
+     * @param userid
+     * @return
+     */
+    @RequestMapping(value = "/updatehandimage", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    , produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResultMap modifyHandImage(@RequestParam("file")MultipartFile file, @RequestParam("userid")long userid){
+        if(!file.isEmpty()){
+            if(file.getContentType().contains("image")){
+                return userInfoService.modifyHandImage(file, userid);
+            }else{
+                return ResultMap.getResultMap(false, "不是图片类型", null);
+            }
+        }else{
+            return ResultMap.getResultMap(false, "文件不能为空", null);
+        }
+    }
 
-
+    /**
+     * 修改用户密码接口
+      * @param username
+     * @param oldpassword
+     * @param newpassword
+     * @return
+     */
+    @RequestMapping(value = "/modifypassword", method = RequestMethod.POST)
+    public ResultMap modifyUserPassword(String username, String oldpassword, String newpassword){
+       if(!userInfoService.checkUserInfo(username, oldpassword)) {
+           return ResultMap.getResultMap(false, "用户名或者旧密码不正确", null);
+       }else{
+           userInfoService.modifyPassword(username, newpassword);
+           return ResultMap.getResultMap(true, "修改成功", null);
+       }
+    }
     /**
      * 获取一个用于返回的规范格式
      * @param stuta

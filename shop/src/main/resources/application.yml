@@ -10,6 +10,10 @@ spring:
     url: jdbc:mysql://192.168.0.101:3306/mall?autoReconnect=true
                       &useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&
                       failOverReadOnly=false
+web:
+  config:
+    uploadpath: classpath:/resources/
+
 server:
   port: 8081
   servlet:
@@ -20,3 +24,5 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+
+

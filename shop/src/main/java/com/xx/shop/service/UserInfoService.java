@@ -1,6 +1,10 @@
 package com.xx.shop.service;
 
+import com.xx.shop.ResultModel.ResultMap;
 import com.xx.shop.entity.UserInfo;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.mail.Multipart;
 
 public interface UserInfoService {
 
@@ -22,11 +26,10 @@ public interface UserInfoService {
      * 修改用户信息
      * @param username
      * @param email
-     * @param handimage
      * @param nickName
      * @param phone
      */
-    void modity(String username, String email, String handimage, String nickName, String phone);
+    void modity(String username, String email, String nickName, String phone);
 
     /**
      * 根据用户名获取用户信息
@@ -69,4 +72,42 @@ public interface UserInfoService {
      * @return
      */
     boolean verifyValue(String key, String value);
+
+    /**
+     * 修改用户头像
+     * @param file
+     * @param userid
+     * @return
+     */
+    ResultMap modifyHandImage(MultipartFile file, long userid);
+
+    /**
+     * 检测用户是否存在
+     * @param usernamae
+     * @return
+     */
+    boolean isExistsUser(String usernamae);
+
+    /**
+     * 检验用户信息是否正确
+     * @param username
+     * @param password
+     * @return
+     */
+    boolean checkUserInfo(String username, String password);
+
+    /**
+     * 根据id获取用户信息
+     * @param userid
+     * @return
+     */
+    UserInfo getUserInfoById(long userid);
+
+    /**
+     * 设置用户的店铺
+     * @param userid
+     * @param storeid -1 表示没有店铺
+     * @return
+     */
+    boolean setUserStore(long userid, long storeid);
 }
