@@ -85,8 +85,9 @@ public class ProductExample {
      * This method corresponds to the database table t_product
      *
      * @mbg.generated Mon Mar 19 21:54:49 CST 2018
+     * @param s
      */
-    public List<Criteria> getOredCriteria() {
+    public List<Criteria> getOredCriteria(String s) {
         return oredCriteria;
     }
 
