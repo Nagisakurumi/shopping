@@ -1,16 +1,16 @@
 package com.xx.shop.service.Impl;
 
-import com.alibaba.druid.util.StringUtils;
 import com.xx.shop.MyConfigs.WebConfig;
 import com.xx.shop.ResultModel.ResultMap;
 import com.xx.shop.dao.UserInfoMapper;
+import com.xx.shop.dto.SessionUser;
 import com.xx.shop.entity.UserInfo;
 import com.xx.shop.entity.UserInfoExample;
 import com.xx.shop.service.MailService;
 import com.xx.shop.service.UserInfoService;
+import com.xx.shop.toolspage.Encryp.MD5;
 import com.xx.shop.toolspage.StringUt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,13 +33,17 @@ public class UserInfoServiceImpl  implements UserInfoService{
         return userInfoMapper.insert(user);
     }
 
+
     @Override
-    public boolean isSureUser(String username, String password) {
+    public SessionUser isSureUser(String username, String password) {
         UserInfo userInfo = getUserByUserName(username);
-        if(userInfo == null){
-            return false;
+        if(MD5.MD5Encode(password) == userInfo.getPassword()){
+            SessionUser sessionUser = new SessionUser();
+            sessionUser.setUserId(userInfo.getUserId());
+            sessionUser.setUsername(username);
+            return sessionUser;
         }else{
-            return true;
+            return null;
         }
     }
 

@@ -41,10 +41,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getDetail(long proId) {
-        ProductImagesExample productImagesExample =new ProductImagesExample();
-        ProductImagesExample.Criteria criteria = productImagesExample.createCriteria();
-        criteria.andPidEqualTo(proId);
-        productImagesMapper.selectByExample(productImagesExample);
+//        ProductImagesExample productImagesExample =new ProductImagesExample();
+//        ProductImagesExample.Criteria criteria = productImagesExample.createCriteria();
+//        criteria.andPidEqualTo(proId);
+//        productImagesMapper.selectByExample(productImagesExample);
 
         return productMapper.selectByPrimaryKey(proId);
     }

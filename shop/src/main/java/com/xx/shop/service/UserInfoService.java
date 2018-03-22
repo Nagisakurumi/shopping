@@ -1,10 +1,9 @@
 package com.xx.shop.service;
 
 import com.xx.shop.ResultModel.ResultMap;
+import com.xx.shop.dto.SessionUser;
 import com.xx.shop.entity.UserInfo;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.mail.Multipart;
 
 public interface UserInfoService {
 
@@ -20,7 +19,7 @@ public interface UserInfoService {
      * @param password
      * @return
      */
-    boolean isSureUser(String username, String password);
+    SessionUser isSureUser(String username, String password);
 
     /**
      * 修改用户信息

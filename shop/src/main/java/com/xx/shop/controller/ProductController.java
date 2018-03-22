@@ -36,6 +36,8 @@ public class ProductController {
     public ResultMap getDetail(long proId) {
             return ResultMap.getResultMap(proService.getDetail(proId));
     }
-
-
+    @RequestMapping(value = "/addticart", method = RequestMethod.GET)
+    public ResultMap addToCart(long proId) {
+        return ResultMap.getResultMap(proService.getDetail(proId));
+    }
 }

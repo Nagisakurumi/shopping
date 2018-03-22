@@ -1,5 +1,6 @@
 package com.xx.shop.service;
 
+import com.xx.shop.dto.ProDetail;
 import com.xx.shop.entity.Product;
 
 import java.util.List;

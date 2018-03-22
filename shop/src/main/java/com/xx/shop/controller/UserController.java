@@ -2,9 +2,13 @@ package com.xx.shop.controller;
 
 
 import com.xx.shop.ResultModel.ResultMap;
+import com.xx.shop.common.SessionHelper;
+import com.xx.shop.dto.SessionUser;
 import com.xx.shop.entity.UserInfo;
 import com.xx.shop.service.MailService;
 import com.xx.shop.service.UserInfoService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +27,6 @@ import java.util.Date;
 @RequestMapping("/user")
 public class UserController {
 
-    /**
-     * 用于的sessionkey
-     */
-    private final static String userSessionName = "userinfo";
     /**
      * 邮箱认证地址
      */
@@ -49,12 +49,15 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResultMap login(HttpSession session, String username, String password){
-        if(userInfoService.isSureUser(username, password) == true){
-            session.setAttribute(userSessionName,username);
-            return getReturnMap(true, "", null);
+    @ApiOperation(nickname = "swagger-login", value = "Swagger的世界", notes = "测试HelloWorld")
+    public ResultMap login(HttpSession session, @ApiParam(value = "用户名") String username,@ApiParam(value = "密码") String password){
+        SessionUser sessionUser = userInfoService.isSureUser(username, password);
+        if(sessionUser!=null){
+            session.setAttribute(SessionHelper.userInfo,sessionUser);
+            return ResultMap.getResultMap(null);
         }else{
-            return getReturnMap(false, "", null);
+
+            return ResultMap.getErrorResultMap("登录失败");
         }
     }
 
@@ -65,7 +68,7 @@ public class UserController {
      */
     @RequestMapping(value = "/islogin", method = RequestMethod.GET)
     public ResultMap isLogin(HttpSession session){
-        if(session.getAttribute(userSessionName) == null){
+        if(session.getAttribute(SessionHelper.userInfo) == null){
             return getReturnMap(true, "", null);
         }else{
             return getReturnMap(false, "", null);
@@ -109,7 +112,7 @@ public class UserController {
     @RequestMapping(value="/sendmail", method = RequestMethod.POST)
     public ResultMap sendMail(HttpSession session, String username){
         String usn = null;
-        usn = (String) session.getAttribute(userSessionName);
+        usn = (String) session.getAttribute(SessionHelper.userInfo);
         usn = usn == null ? username : usn;
         if(usn.equals("")){
             return getReturnMap(false, "", null);
