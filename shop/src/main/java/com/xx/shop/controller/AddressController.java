@@ -4,17 +4,17 @@ import com.xx.shop.ResultModel.ResultMap;
 import com.xx.shop.common.ReturnHelper;
 import com.xx.shop.entity.Address;
 import com.xx.shop.service.AddressService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 
 @RestController
 @RequestMapping("/address")
+@Api(tags = "Swagger演示")
 public class AddressController {
     @Autowired
     private AddressService addressService;
@@ -25,6 +25,7 @@ public class AddressController {
      * @param userId
      * @return 地址列表
      */
+    @ApiOperation(value = "获取地址列表", tags = "getAddressList")
     @RequestMapping(value = "/getaddresslist", method = RequestMethod.GET)
     public ResultMap getAddressList(Long userId) {
         return ResultMap.getResultMap(true,"",addressService.queryAll(userId));
@@ -52,8 +53,9 @@ public class AddressController {
      * @param address
      * @return
      */
+    @ApiOperation(value = "增加地址列表", tags = "insertaddress")
     @RequestMapping(value = "/insertaddress", method = RequestMethod.POST)
-    public ResultMap insertAddress(int isdefault,String consignee,String mobile,String provice,String city,String town ,String address){
+    public ResultMap insertAddress(@RequestParam("isdefault") Integer  isdefault, @RequestParam("consignee") String consignee, @RequestParam("mobile") String mobile, @RequestParam("provice") String provice, @RequestParam("city") String city, @RequestParam("town") String town , @RequestParam("address") String address){
         Address add = new Address();
         add.setIsdefault(isdefault);
         add.setConsignee(consignee);
@@ -62,6 +64,7 @@ public class AddressController {
         add.setCity(city);
         add.setTown(town);
         add.setAddress(address);
+        add.setUserId((long) 1);
         addressService.insertAddress(add);
         return  ResultMap.getResultMap(true,"",null);
     }

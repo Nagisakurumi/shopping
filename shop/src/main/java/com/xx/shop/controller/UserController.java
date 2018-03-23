@@ -7,6 +7,8 @@ import com.xx.shop.dto.SessionUser;
 import com.xx.shop.entity.UserInfo;
 import com.xx.shop.service.MailService;
 import com.xx.shop.service.UserInfoService;
+import com.xx.shop.toolspage.Encryp.MD5;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,9 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -49,7 +53,6 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    @ApiOperation(nickname = "swagger-login", value = "Swagger的世界", notes = "测试HelloWorld")
     public ResultMap login(HttpSession session, @ApiParam(value = "用户名") String username,@ApiParam(value = "密码") String password){
         SessionUser sessionUser = userInfoService.isSureUser(username, password);
         if(sessionUser!=null){
@@ -88,7 +91,7 @@ public class UserController {
         }
         UserInfo userInfo = new UserInfo();
         userInfo.setUsername(username);
-        userInfo.setPassword(password);
+        userInfo.setPassword(MD5.MD5Encode(password));
         userInfo.setCreateTime(new Date());
         userInfo.setEmail(email);
         userInfo.setHandImage(handimage);
@@ -212,6 +215,13 @@ public class UserController {
     private ResultMap getReturnMap(boolean stuta, String msg, Object data){
         return ResultMap.getResultMap(stuta, msg, data);
     }
+    @ApiOperation(value="获取用户列表", notes="")
+    @RequestMapping(value={""}, method=RequestMethod.GET)
+    public List<UserInfo> getUserList() {
+        List<UserInfo> r = new ArrayList<UserInfo>();
+        return r;
+    }
+
 
 
 

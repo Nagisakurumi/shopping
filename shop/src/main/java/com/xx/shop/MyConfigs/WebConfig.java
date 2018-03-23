@@ -12,5 +12,9 @@ public class WebConfig {
         return uploadpath;
     }
 
+    public void setUploadpath(String uploadpath) {
+        this.uploadpath = uploadpath;
+    }
+
     private String uploadpath;
 }

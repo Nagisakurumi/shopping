@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -41,11 +42,11 @@ public class CartServiceImpl implements CartService {
     public void InsertToCart(long storeId,long proId,long userId) {
         ShopCart shopCart = new ShopCart();
         shopCart.setUserId(userId);
-        shopCart.setCreateTime(new DateTime());
+        shopCart.setCreateTime(new Date());
         shopCart.setNum(1);
         shopCart.setProductId(proId);
         shopCart.setStoreId(storeId);
-        shopCart.setUpdateTime(new DateTime());
+        shopCart.setUpdateTime(new Date());
         shopCartMapper.insert(shopCart);
     }
 

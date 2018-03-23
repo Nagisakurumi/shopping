@@ -24,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> queryProList(int pageSize, int pageIndex, String order,boolean isAsc) {
         PageHelper.startPage(pageIndex, pageSize);
         ProductExample productExample = new ProductExample();
-        productExample.getOredCriteria(order+  (isAsc ? "ASC" : "desc"));
+        // productExample.getOredCriteria(order+  (isAsc ? "ASC" : "desc"));
         return productMapper.selectByExample(productExample);
 
     }
@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
         ProductExample productExample = new ProductExample();
         ProductExample.Criteria criteria = productExample.createCriteria();
         criteria.andCateEqualTo(cateId);
-        productExample.getOredCriteria(order+  (isAsc ? "ASC" : "desc"));
+        //productExample.getOredCriteria(order+  (isAsc ? "ASC" : "desc"));
         return productMapper.selectByExample(productExample);
     }
 
