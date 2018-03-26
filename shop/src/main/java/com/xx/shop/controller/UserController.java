@@ -53,7 +53,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResultMap login(HttpSession session, @ApiParam(value = "用户名") String username,@ApiParam(value = "密码") String password){
+    public ResultMap login(HttpSession session, @ApiParam(value = "用户名")@RequestParam("username") String username,@ApiParam(value = "密码") @RequestParam("password")String password){
         SessionUser sessionUser = userInfoService.isSureUser(username, password);
         if(sessionUser!=null){
             session.setAttribute(SessionHelper.userInfo,sessionUser);
@@ -83,8 +83,8 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/regist", method = RequestMethod.POST)
-    public ResultMap regist(String username, String password, String email, String handimage, String nickName
- ,String phone){
+    public ResultMap regist(@RequestParam("username")String username, @RequestParam("password")String password, @RequestParam("email")String email, @RequestParam("handimage")String handimage, @RequestParam("nickName")String nickName
+ ,@RequestParam("phone")String phone){
         UserInfo otherinfo = userInfoService.getUserByUserName(username);
         if(otherinfo == null){
             return getReturnMap(false, "用户名已经存在", null);
@@ -113,7 +113,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value="/sendmail", method = RequestMethod.POST)
-    public ResultMap sendMail(HttpSession session, String username){
+    public ResultMap sendMail(HttpSession session, @RequestParam("username")String username){
         String usn = null;
         usn = (String) session.getAttribute(SessionHelper.userInfo);
         usn = usn == null ? username : usn;
@@ -138,7 +138,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/verify", method = RequestMethod.GET)
-    public ResultMap verifyMail(HttpSession session, String username) throws ParseException {
+    public ResultMap verifyMail(HttpSession session, @RequestParam("username")String username) throws ParseException {
         Date now = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = (String)session.getAttribute("time");
@@ -163,7 +163,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/getuserinfo", method = RequestMethod.POST)
-    public ResultMap getUserInfo(HttpSession session, String username){
+    public ResultMap getUserInfo(HttpSession session, @RequestParam("username")String username){
         UserInfo userInfo = userInfoService.getUserByUserName(username);
         userInfo.setPassword("*********");
         return getReturnMap(true, "", userInfo);
@@ -197,7 +197,8 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/modifypassword", method = RequestMethod.POST)
-    public ResultMap modifyUserPassword(String username, String oldpassword, String newpassword){
+    public ResultMap modifyUserPassword(@RequestParam("username")String username, @RequestParam("oldpassword")String oldpassword,
+                                        @RequestParam("newpassword")String newpassword){
        if(!userInfoService.checkUserInfo(username, oldpassword)) {
            return ResultMap.getResultMap(false, "用户名或者旧密码不正确", null);
        }else{

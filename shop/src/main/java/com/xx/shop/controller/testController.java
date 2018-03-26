@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 
 @RestController
+@Api(value="用户controller",tags={"用户操作接口"})
 @RequestMapping(value="/test")
-@Api(value = "testController", description = "REST Apis related to Student")
 public class testController {
     @ApiOperation(value = "Get specific Student in the System ", tags = "postUser")
     @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "UserInfo")

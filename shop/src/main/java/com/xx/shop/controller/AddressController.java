@@ -5,6 +5,8 @@ import com.xx.shop.common.ReturnHelper;
 import com.xx.shop.entity.Address;
 import com.xx.shop.service.AddressService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,28 +18,30 @@ import java.util.Map;
 @RequestMapping("/address")
 @Api(tags = "Swagger演示")
 public class AddressController {
+
     @Autowired
     private AddressService addressService;
-
     /**
      * 根据用户查询所有用户的地址
-     *
-     * @param userId
+     * @param userId 用户id
      * @return 地址列表
      */
-    @ApiOperation(value = "获取地址列表", tags = "getAddressList")
-    @RequestMapping(value = "/getaddresslist", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAddressList", method = RequestMethod.GET)
+    @ApiOperation("根据用户查询所有用户的地址")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query",name="userId",dataType="Long",required=true,value="用户Id",defaultValue="1 ")
+    })
     public ResultMap getAddressList(Long userId) {
-        return ResultMap.getResultMap(true,"",addressService.queryAll(userId));
+        return ResultMap.getResultMap(addressService.queryAll(userId));
     }
 
     /**
      * 根据地址id获取地址的详细
-     * @param addressId
+     * @param addressId 地址Id
      * @return
      */
-    @RequestMapping(value = "/{addressId}/getaddressbyid", method = RequestMethod.GET)
-    public ResultMap getAddressById(@PathVariable("addressId") Long addressId) {
+    @RequestMapping(value = "/getAddressById", method = RequestMethod.GET)
+    public ResultMap getAddressById(Long addressId) {
         addressService.getAddresById(addressId);
         return  ResultMap.getResultMap(true,"",null);
     }
@@ -53,9 +57,8 @@ public class AddressController {
      * @param address
      * @return
      */
-    @ApiOperation(value = "增加地址列表", tags = "insertaddress")
-    @RequestMapping(value = "/insertaddress", method = RequestMethod.POST)
-    public ResultMap insertAddress(@RequestParam("isdefault") Integer  isdefault, @RequestParam("consignee") String consignee, @RequestParam("mobile") String mobile, @RequestParam("provice") String provice, @RequestParam("city") String city, @RequestParam("town") String town , @RequestParam("address") String address){
+    @RequestMapping(value = "/insertAddress", method = RequestMethod.POST)
+    public ResultMap insertAddress(@RequestParam("isdefault") int  isdefault, @RequestParam("consignee") String consignee, @RequestParam("mobile") String mobile, @RequestParam("provice") String provice, @RequestParam("city") String city, @RequestParam("town") String town , @RequestParam("address") String address){
         Address add = new Address();
         add.setIsdefault(isdefault);
         add.setConsignee(consignee);
@@ -80,7 +83,7 @@ public class AddressController {
      * @param address
      * @return
      */
-    @RequestMapping(value = "/modifyaddress", method = RequestMethod.POST)
+    @RequestMapping(value = "/modifyAddress", method = RequestMethod.POST)
     public ResultMap modifyAddress(int isdefault,String consignee,String mobile,String provice,String city,String town ,String address){
         Address add = new Address();
         add.setIsdefault(isdefault);
@@ -99,7 +102,7 @@ public class AddressController {
      * @param ids
      * @return
      */
-    @RequestMapping(value = "/deleteaddress", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteAddress", method = RequestMethod.POST)
     public ResultMap deleteAddress(String ids){
         if(ids.isEmpty()){
             return ResultMap.getErrorResultMap("地址为空");
