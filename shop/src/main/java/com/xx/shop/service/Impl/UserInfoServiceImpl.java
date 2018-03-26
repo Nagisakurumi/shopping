@@ -30,6 +30,7 @@ public class UserInfoServiceImpl  implements UserInfoService{
 
     @Override
     public int addUser(UserInfo user) {
+        user.setPassword(StringUt.md5Password((user.getPassword())));
         return userInfoMapper.insert(user);
     }
 
