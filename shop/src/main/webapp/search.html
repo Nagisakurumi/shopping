@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="css/head.css" rel="stylesheet">
+    <link href="css/search.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/vue.esm.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<div class="frostedglass-inner">
+        <a class="btn btn-primary center" style="height:50%;left:3%;padding-top:0px;" href="javascript :history.back(-1)">返回</a>
+        <p class="center left10 disinlinebox">主页</p>
+        <!-- <img class="img-circle left50 center disinlinebox pointer-Cour" src="imgs/defult_head.png" onclick="tologion()"/> -->
+        <a class="center left50 disinlinebox padding-left10" href="login.html">未登录，登录</a>
+        <a href="" class="center left50 padding-left10 disinlinebox">购物车</a>
+        <a href="" class="center left50 padding-left10 disinlinebox">寻找宝贝</a>
+        <a href="" class="center left50 padding-left10 disinlinebox">我的店铺</a>
+        <div class="btn-group center left50 padding-left10 disinlinebox" style="height:40px;">
+                <button type="button" class="btn btn-default dropdown-toggle btn-lg" data-toggle="dropdown"
+                style="height:30px;padding:0px 0px 0px 0px;font-size:15px;background:#ffffff10;
+                width:70px;"
+                >我的
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a href="#">购物记录</a>
+                    </li>
+                    <li>
+                        <a href="#">积分记录</a>
+                    </li>
+                </ul>
+            </div>
+    </div>
+    <img class="head-img" src="imgs/main_head.jpg">
+
+    <div class="input-group col-md-3" style="margin-top:20px; position: relative;
+     margin-left:auto;margin-right:auto;box-shadow:-1px 3px 20px 10px #5a5b5c, 0 1px 0 #080808;">  
+        <input type="text" class="form-control"placeholder="请输入字段名" / >  
+            <span class="input-group-btn">  
+            <button class="btn btn-info btn-search">查找</button>  
+            <button class="btn btn-info btn-search" style="margin-left:3px">添加</button>  
+        </span>  
+    </div>  
+
+    <div>
+        <div class="contentlistdiv">
+            <p>综合内容</p>
+            <HR style="FILTER: 
+            alpha(opacity=100,finishopacity=0,style=3);height:3px;
+            " 
+            width="80%" color=#987cb9 SIZE=3>
+            
+            <div>
+                <div>
+                    <div>
+                        <p>排序:</p>
+                        <span>信用排序↑</span>
+                        <span>价格↑</span>
+                        <span>上架时间↑</span>
+                    </div>
+                </div>
+                <ul id="contentlist">
+                    <!-- <li v-for="item for items"> -->
+                    <li class="contents">
+                        <img src="imgs/main_head.jpg">
+                        <div>
+                            <p>￥18</p>
+                            <span>库存:有</span>
+                        </div>
+                        <a href="detail.html">打打分的撒旦法萨芬新款女鞋</a>
+                        <div style="height:20px;">
+                            <text>是否最热</text>
+                            <input type="checkbox" checked="true" disabled="disabled">
+                            <text>是否最新</text>
+                            <input type="checkbox" checked="true" disabled="disabled">
+                        </div>
+                        <!-- {{ item.img}}
+                        {{item.price}}
+                        {{item.logo}}
+                        {{item.name}} -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
