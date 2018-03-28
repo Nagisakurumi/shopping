@@ -6,6 +6,7 @@ import com.xx.shop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,9 +15,9 @@ public class ProductController {
     @Autowired
     public ProductService proService;
 
-    @RequestMapping(value = "/queryprolist", method = RequestMethod.GET)
-    public ResultMap queryProList(int pageSize, int pageIndex, String order, boolean isAsc) {
-        if (pageIndex < 1000) {
+    @RequestMapping(value = "/queryProList", method = RequestMethod.GET)
+    public ResultMap queryProList(@RequestParam("pageSize")int pageSize, @RequestParam("pageIndex")int pageIndex, @RequestParam("order")String order, @RequestParam("isAsc")boolean isAsc) {
+        if (pageSize < 1000) {
             return ResultMap.getResultMap(proService.queryProList(pageSize, pageIndex, order, isAsc));
         } else {
             return ResultMap.getErrorResultMap("请求数据过多");

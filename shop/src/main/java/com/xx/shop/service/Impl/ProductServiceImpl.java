@@ -24,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> queryProList(int pageSize, int pageIndex, String order,boolean isAsc) {
         PageHelper.startPage(pageIndex, pageSize);
         ProductExample productExample = new ProductExample();
-        // productExample.getOredCriteria(order+  (isAsc ? "ASC" : "desc"));
+        productExample.setOrderByClause(order+" "+(isAsc ? "ASC" : "desc"));
         return productMapper.selectByExample(productExample);
 
     }
