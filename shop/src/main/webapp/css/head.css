@@ -1,0 +1,47 @@
+.frostedglass-inner:before{
+    content:'';
+    position:absolute;
+    top: 0;right: 0;left: 0;bottom: 0;
+    filter:blur(20px);
+    /* background-size: 41px 100%,61px 100%,83px 100%; */
+    z-index:-1;
+}
+  .frostedglass-inner{
+    position:absolute;
+    background:rgba(255, 255, 255, 0.212);
+    height: 50px;
+    width: 100%;
+}
+
+.center{
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+}
+
+.left10{
+    left: 10%;
+    position: relative;
+}
+.left50{
+    left: 50%;
+    position: relative;
+}
+
+.padding-left10{
+    padding-left: 10px;
+}
+
+.pointer-Cour{
+    cursor: pointer;
+}
+
+.disinlinebox{
+    display: inline-block;
+}
+.head-img{
+    height: 180px;
+    width: 100%;
+    image-rendering: optimizeQuality;
+    background-size: 100% 100%;
+}

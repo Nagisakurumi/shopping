@@ -1,0 +1,76 @@
+.contentlistdiv{
+    width:90%;
+    height: auto;
+    left: 5%;
+    position: relative;
+    background: linear-gradient(top,#434345,#2f3032);
+}
+
+.contents{
+    width: 150px;
+    height: 220px;
+}
+
+.contents img{
+    width: 100%;
+    height: 150px;
+    background-size: 100% 100%;
+}
+
+.contents p{
+    font-size: 20px;
+    color: red;
+    display: inline-block;
+}
+
+.contents span{
+    font-size: 10px;
+    color:gray;
+    display: inline-block;
+    left: 40%;
+    position: relative;
+}
+
+.contents a{
+    font-size: 15px;
+    color: gray;
+}
+
+.contents text{
+    font-size: 5px;
+    display: inline-block;
+    color: gray;
+    height: 20px;
+    line-height: 20px;
+}
+.contents input{
+    height: 20px;
+    line-height: 20px;
+    margin: 3px;
+}
+
+.line-title{
+    border-radius: 3px;
+    background: #31b0d5;
+    display: inline-block;
+    width:80px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    color: white;
+    
+}
+.title{
+    font-size:16px;
+    margin-left:3.5%;
+}
+
+.title span{
+    margin-left: 30px;
+    cursor: pointer;
+
+}
+
+#contentlist{
+    margin-top: 30px;
+}
