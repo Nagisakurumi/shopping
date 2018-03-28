@@ -10,8 +10,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.Properties;
 
 @SpringBootApplication
-@EnableSwagger2
-@ComponentScan(basePackages = {"com.xx.shop"})
 @MapperScan(basePackages = { "com.xx.shop.dao" }, sqlSessionFactoryRef = "sqlSessionFactory")
 public class shopapplication {
     public static void main(String [] args)

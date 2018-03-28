@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-
-
 @RestController
 @RequestMapping("/address")
 @Api(tags = "Swagger演示")
@@ -28,9 +26,6 @@ public class AddressController {
      */
     @RequestMapping(value = "/getAddressList", method = RequestMethod.GET)
     @ApiOperation("根据用户查询所有用户的地址")
-    @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query",name="userId",dataType="Long",required=true,value="用户Id",defaultValue="1 ")
-    })
     public ResultMap getAddressList(Long userId) {
         return ResultMap.getResultMap(addressService.queryAll(userId));
     }
