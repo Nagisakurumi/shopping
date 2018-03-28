@@ -1,18 +1,15 @@
 function login(){
-    alert("开始登陆!");
     var username = $("#username").val();
     var userpassword = $("#userpassword").val();
-
-
+    
 
     $.ajax({
         type:"POST",
-        url: "http://www.wxxand.xyx/shop/user/login",
+        url: "http://www.wxxandxyx.cn:8081/shop/user/login",
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         data:{"username": username, "password":userpassword},
         success : function (map) {
-            alert("登陆成功!");
             window.location.href = "../index.html";
         },
         error :function(e){

@@ -80,7 +80,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		});
 	</script>
 	<!-- //smooth-scrolling-of-move-up -->
-	<script type="text/javascript" src="js/login.js"></script>
+	<script type="text/javascript" src="js/regist.js"></script>
 </head>
 <body>
 	<!-- header -->
@@ -955,18 +955,22 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			<h3 class="w3ls-title w3ls-title1">Login to your account</h3>  
 			<div class="login-body">
 				<div style="display:block;">
-					<input type="text" class="user" id="username" name="email" placeholder="Enter your email" required="">
-					<input type="password" name="password" id="password" class="lock" placeholder="Password" required="">
-					<input type="submit" value="Login" onclick="login()">
+                    <input type="text" class="user" id="email" placeholder="Enter your emial" required="">
+                    <input type="text" id="username" class="user" placeholder="Enter your username" required="">
+                    <input type="password" name="password" id="password" class="lock" placeholder="Password" required="">
+                    <input type="password" name="password" id="password2" class="lock" placeholder="Password2" required="">
+                    <input type="text" id="phone" class="user" placeholder="phone num" required="">
+                    
+					<input type="submit" value="regist" onclick="regist()">
 					<div class="forgot-grid">
 						<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Remember me</label>
 						<div class="forgot">
-							<a href="regist.html">No Account?</a>
+							<a href="./login.html">to logon</a>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
 				</div>
-			</d>  
+			</div>  
 			<h6> Not a Member? <a href="signup.html">Sign Up Now »</a> </h6> 
 			<div class="login-page-bottom social-icons">
 				<h5>Recover your social account</h5>
