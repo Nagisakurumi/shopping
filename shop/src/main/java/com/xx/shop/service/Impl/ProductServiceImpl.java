@@ -1,9 +1,11 @@
 package com.xx.shop.service.Impl;
 
 import com.github.pagehelper.PageHelper;
+import com.sun.tools.javac.util.Convert;
 import com.xx.shop.common.ProductDetail;
 import com.xx.shop.dao.ProductImagesMapper;
 import com.xx.shop.dao.ProductMapper;
+import com.xx.shop.dto.ProductPageDto;
 import com.xx.shop.entity.Product;
 import com.xx.shop.entity.ProductExample;
 import com.xx.shop.entity.ProductImages;
@@ -22,11 +24,18 @@ public class ProductServiceImpl implements ProductService {
     ProductImagesMapper productImagesMapper;
 
     @Override
-    public List<Product> queryProList(int pageSize, int pageIndex, String order,boolean isAsc) {
-        PageHelper.startPage(pageIndex, pageSize);
+    public ProductPageDto queryProList(int pageSize, int pageIndex, String order, boolean isAsc) {
         ProductExample productExample = new ProductExample();
         productExample.setOrderByClause(order+" "+(isAsc ? "ASC" : "desc"));
-        return productMapper.selectByExample(productExample);
+        int totalPage =(int)productMapper.countByExample(productExample);
+        PageHelper.startPage(pageIndex, pageSize);
+
+        List<Product> product =productMapper.selectByExample(productExample);
+        ProductPageDto productPageDtoList = new ProductPageDto();
+
+        productPageDtoList.setProductList(product);
+        productPageDtoList.setTotalPage(totalPage);
+        return productPageDtoList;
 
     }
 
