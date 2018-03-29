@@ -1,6 +1,7 @@
 package com.xx.shop.service.Impl;
 
 import com.github.pagehelper.PageHelper;
+import com.xx.shop.common.ProductDetail;
 import com.xx.shop.dao.ProductImagesMapper;
 import com.xx.shop.dao.ProductMapper;
 import com.xx.shop.entity.Product;
@@ -40,13 +41,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getDetail(long proId) {
+    public ProductDetail getDetail(long proId) {
 //        ProductImagesExample productImagesExample =new ProductImagesExample();
 //        ProductImagesExample.Criteria criteria = productImagesExample.createCriteria();
 //        criteria.andPidEqualTo(proId);
 //        productImagesMapper.selectByExample(productImagesExample);
-
-        return productMapper.selectByPrimaryKey(proId);
+        Product product = productMapper.selectByPrimaryKey(proId);
+        ProductImagesExample productImagesExample = new ProductImagesExample();
+        ProductImagesExample.Criteria criteria = productImagesExample.createCriteria();
+        criteria.andPidEqualTo(proId);
+        List<ProductImages> productImages = productImagesMapper.selectByExample(productImagesExample);
+        ProductDetail productDetail = new ProductDetail();
+        productDetail.setProduct(product);
+        productDetail.setProductImages(productImages);
+        return  productDetail;
     }
 
 }

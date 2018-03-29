@@ -11,12 +11,10 @@ import com.xx.shop.toolspage.Encryp.MD5;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -53,8 +51,11 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResultMap login(HttpSession session, @ApiParam(value = "用户名")@RequestParam("username") String username,@ApiParam(value = "密码") @RequestParam("password")String password){
-        SessionUser sessionUser = userInfoService.isSureUser(username, password);
+    @ResponseBody
+    public ResultMap login(HttpSession session, @RequestBody UserInfo userInfo){
+        if(session.getAttribute(SessionHelper.userInfo) != null)
+            return ResultMap.getResultMap("登录成功");
+        SessionUser sessionUser = userInfoService.isSureUser(userInfo.getUsername(), userInfo.getPassword());
         if(sessionUser!=null){
             session.setAttribute(SessionHelper.userInfo,sessionUser);
             return ResultMap.getResultMap(null);
@@ -83,21 +84,17 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/regist", method = RequestMethod.POST)
-    public ResultMap regist(@RequestParam("username")String username, @RequestParam("password")String password, @RequestParam("email")String email, @RequestParam("handimage")String handimage, @RequestParam("nickName")String nickName
- ,@RequestParam("phone")String phone){
-        UserInfo otherinfo = userInfoService.getUserByUserName(username);
-        if(otherinfo == null){
+    @ResponseBody
+    public ResultMap regist(@RequestBody UserInfo userInfo){
+        UserInfo otherinfo = userInfoService.getUserByUserName(userInfo.getUsername());
+        if(otherinfo != null){
             return getReturnMap(false, "用户名已经存在", null);
         }
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUsername(username);
-        userInfo.setPassword(MD5.MD5Encode(password));
+//        UserInfo userInfo = new UserInfo();
+        userInfo.setHandImage("");
+        userInfo.setNickname("用户" + userInfo.getUsername());
         userInfo.setCreateTime(new Date());
-        userInfo.setEmail(email);
-        userInfo.setHandImage(handimage);
         userInfo.setLevelId(0);
-        userInfo.setNickname(nickName);
-        userInfo.setPhone(phone);
         userInfo.setStoreId(-1L);
         userInfo.setUpdateTime(new Date());
         userInfo.setUserIntegral(0);

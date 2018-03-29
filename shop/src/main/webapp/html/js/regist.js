@@ -23,11 +23,10 @@ function regist() {
     }
     $.ajax({
         type:"POST",
-        url: "http://www.wxxandxyx.cn:8081/shop/user/regist",
+        url: testUrl + "/user/regist",
         contentType: "application/json;charset=utf-8",
         dataType: "json",
-        data:{"username": "'" + username + "'" , "password":userpassword, "email" : email.value, 
-        "handimage": "", "nickName":"","phone":phone},
+        data:JSON.stringify({"username": username, "password":userpassword, "email" : email.value,"phone":phone}),
         success : function (map) {
             alert("注册成功!");
             window.location.href = "../login.html";
