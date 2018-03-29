@@ -34,7 +34,7 @@ public class ProductController {
         }
     }
     @RequestMapping(value = "/getdetail", method = RequestMethod.GET)
-    public ResultMap getDetail(long proId) {
+    public ResultMap getDetail(@RequestParam(value = "proId") long proId) {
             return ResultMap.getResultMap(proService.getDetail(proId));
     }
     @RequestMapping(value = "/addticart", method = RequestMethod.GET)

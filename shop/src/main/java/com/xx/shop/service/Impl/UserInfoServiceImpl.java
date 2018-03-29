@@ -30,7 +30,7 @@ public class UserInfoServiceImpl  implements UserInfoService{
 
     @Override
     public int addUser(UserInfo user) {
-        user.setPassword(StringUt.md5Password((user.getPassword())));
+        user.setPassword(StringUt.md5Password(user.getPassword()));
         return userInfoMapper.insert(user);
     }
 
@@ -38,7 +38,7 @@ public class UserInfoServiceImpl  implements UserInfoService{
     @Override
     public SessionUser isSureUser(String username, String password) {
         UserInfo userInfo = getUserByUserName(username);
-        if(MD5.MD5Encode(password) == userInfo.getPassword()){
+        if(StringUt.md5Password(password).equals(userInfo.getPassword())){
             SessionUser sessionUser = new SessionUser();
             sessionUser.setUserId(userInfo.getUserId());
             sessionUser.setUsername(username);
@@ -63,6 +63,8 @@ public class UserInfoServiceImpl  implements UserInfoService{
         UserInfoExample.Criteria criteria = userInfoExample.createCriteria();
         criteria.andUsernameEqualTo(username);
         List<UserInfo> userList = userInfoMapper.selectByExample(userInfoExample);
+        if(userList.size() == 0)
+            return null;
         return userList.get(0);
     }
     @Override

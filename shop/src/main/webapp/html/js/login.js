@@ -1,14 +1,14 @@
 function login(){
     var username = $("#username").val();
-    var userpassword = $("#userpassword").val();
+    var userpassword = $("#password").val();
     
 
     $.ajax({
         type:"POST",
-        url: "http://www.wxxandxyx.cn:8081/shop/user/login",
+        url: testUrl + "/user/login",
         contentType: "application/json;charset=utf-8",
         dataType: "json",
-        data:{"username": username, "password":userpassword},
+        data:JSON.stringify({"username": username, "password":userpassword}),
         success : function (map) {
             window.location.href = "../index.html";
         },

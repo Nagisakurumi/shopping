@@ -100,6 +100,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	});
 </script>
 <!-- //smooth-scrolling-of-move-up -->  
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/single.js"></script>
 </head>
 <body>
 	<!-- header -->
@@ -984,7 +986,16 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 				<div class="single-page-row" id="detail-21">
 					<div class="col-md-6 single-top-left">	
 						<div class="flexslider">
-							<ul class="slides">
+							<ul class="slides" id="imageslist">
+								<li data-thumb="images/s1.jpg">
+									<div class="thumb-image detail_images"> <img src="images/s1.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+								</li>
+								<li data-thumb="images/s2.jpg">
+									 <div class="thumb-image"> <img src="images/s2.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+								</li>
+								<li data-thumb="images/s3.jpg">
+								   <div class="thumb-image"> <img src="images/s3.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+								</li> 
 								<li data-thumb="images/s1.jpg">
 									<div class="thumb-image detail_images"> <img src="images/s1.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
 								</li>
@@ -998,25 +1009,25 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						</div>
 					</div>
 					<div class="col-md-6 single-top-right">
-						<h3 class="item_name">Electric Snow Blower</h3>
+						<h3 class="item_name" id="productname">Electric Snow Blower</h3>
 						<p>Processing Time: Item will be shipped out within 2-3 working days. </p>
 						<div class="single-rating">
-							<ul>
+							<ul id="starList">
 								<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 								<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 								<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 								<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-								<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-								<li class="rating">20 reviews</li>
+								<!-- <li><i class="fa fa-star-o" aria-hidden="true"></i></li> -->
+								<li class="rating" id="reviews">20 reviews</li>
 								<li><a href="#">Add your review</a></li>
 							</ul> 
 						</div>
 						<div class="single-price">
 							<ul>
-								<li>$540</li>  
-								<li><del>$600</del></li> 
-								<li><span class="w3off">10% OFF</span></li> 
-								<li>Ends on: June,5th</li>
+								<li id="offprice">$540</li>  
+								<li><del id="price">$600</del></li> 
+								<li><span class="w3off" id="off">10% OFF</span></li> 
+								<li id="time">Ends on: June,5th</li>
 								<li><a href="#"><i class="fa fa-gift" aria-hidden="true"></i> Coupon</a></li>
 							</ul>	
 						</div> 
