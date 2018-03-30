@@ -1,0 +1,74 @@
+.addressbox{
+    /* border: black 1px solid; */
+    width: 200px;
+    height: 130px;
+    display: inline-block;
+    margin-left: 50px;
+    position: relative;
+    
+}
+
+.addressbox:hover{
+    border: slateblue 3px solid;
+}
+
+.addressbox text{
+    border-bottom: dotted 1px gray;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+}
+
+.addressbox p{
+    word-wrap: break-word;
+    font-size: 14px;
+    width: 80%;
+    height: 90%;
+    position: relative;
+    margin: 5% 10% 5% 10%;
+}
+
+.addresseditor{
+    width: 40%;
+    left: 30%;
+    position: relative;
+}
+
+.line{
+    display: block;
+    margin-top: 40px;
+    height: 50px;
+}
+
+.line p {
+    display: inline-block;
+    font-size: 14px;
+    height: 50px;
+    line-height: 50px;
+    margin-right: 30px;
+    margin-top: 0px;
+    width: 70px;
+}
+
+.line b{
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    width: 40px;
+    text-align: center;
+    position: relative;
+    right: -70%;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.line b:hover{
+    background-color: dodgerblue;
+    color: white;
+}
+
+.line input{
+    display: inline-block;
+    width: 60%;
+}
