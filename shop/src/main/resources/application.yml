@@ -10,6 +10,13 @@ spring:
     url: jdbc:mysql://www.wxxandxyx.cn:8888/mall?autoReconnect=true
                       &useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&
                       failOverReadOnly=false
+  redis:
+    port: 6379
+    host: www.wxxandxyx.cn
+    connectionTimeout=5000
+    soTimeout=5000
+    database=0
+
 web:
   config:
     uploadpath: classpath:/resources/
