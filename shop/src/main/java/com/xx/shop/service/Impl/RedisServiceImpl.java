@@ -4,114 +4,82 @@ import com.xx.shop.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Administrator on 2017/3/1 16:00.
  */
 @Service
-public class RedisServiceImpl<T> implements RedisService<T> {
+public class RedisServiceImpl implements RedisService {
     @Autowired
     RedisTemplate<String, Object> redisTemplate;
-    @Resource
-    HashOperations<String, String, T> hashOperations;
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
     /**
-     * key
+     * 固定的key
      */
-    protected final  String KEY = "MYREDIUS";
-    /**
-     * 存入redis中的key
-     *
-     * @return
-     */
-    public String getRedisKey()
-    {
+    private static String KEY = "DDDDD";
+
+
+    @Override
+    public String getRedisKey() {
         return KEY;
     }
 
-
-    /**
-     * 添加
-     *
-     * @param key    key
-     * @param doamin 对象
-     * @param expire 过期时间(单位:秒),传入 -1 时表示不设置过期时间
-     */
     @Override
-    public void put(String key, T doamin, long expire) {
-        hashOperations.put(getRedisKey(), key, doamin);
-        if (expire != -1) {
-            redisTemplate.expire(getRedisKey(), expire, TimeUnit.SECONDS);
-        }
+    public String getRandomKey() {
+        return UUID.randomUUID().toString();
     }
 
+    @Override
+    public void put(String key, String value) {
+        stringRedisTemplate.opsForValue().set(key, value, -1);
+    }
 
-    /**
-     * 删除
-     *
-     * @param key 传入key的名称
-     */
+    @Override
+    public void put(String key, String value, long time) {
+        stringRedisTemplate.opsForValue().set(key, value, time);
+    }
+
+    @Override
     public void remove(String key) {
-        hashOperations.delete(getRedisKey(), key);
+        stringRedisTemplate.delete(key);
     }
 
-    /**
-     * 查询
-     *
-     * @param key 查询的key
-     * @return
-     */
-    public T get(String key) {
-        return hashOperations.get(getRedisKey(), key);
+    @Override
+    public String get(String key) {
+        return stringRedisTemplate.opsForValue().get(key);
     }
 
-    /**
-     * 获取当前redis库下所有对象
-     *
-     * @return
-     */
-    public List<T> getAll() {
-        return hashOperations.values(getRedisKey());
+    @Override
+    public List<Object> getAll() {
+        return null;
     }
 
-    /**
-     * 查询查询当前redis库下所有key
-     *
-     * @return
-     */
+    @Override
     public Set<String> getKeys() {
-        return hashOperations.keys(getRedisKey());
+        return null;
     }
 
-    /**
-     * 判断key是否存在redis中
-     *
-     * @param key 传入key的名称
-     * @return
-     */
+    @Override
     public boolean isKeyExists(String key) {
-        return hashOperations.hasKey(getRedisKey(), key);
+        return stringRedisTemplate.hasKey(key);
     }
 
-    /**
-     * 查询当前key下缓存数量
-     *
-     * @return
-     */
+    @Override
     public long count() {
-        return hashOperations.size(getRedisKey());
+        return 0;
     }
 
-    /**
-     * 清空redis
-     */
+    @Override
     public void empty() {
-        Set<String> set = hashOperations.keys(getRedisKey());
-        set.stream().forEach(key -> hashOperations.delete(getRedisKey(), key));
+
     }
 }

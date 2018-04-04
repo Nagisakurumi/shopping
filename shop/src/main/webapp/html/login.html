@@ -958,7 +958,15 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 				<div style="display:block;">
 					<input type="text" class="user" id="username" name="email" placeholder="Enter your email" required="">
 					<input type="password" name="password" id="password" class="lock" placeholder="Password" required="">
+
+					<div>
+						<input type="text" class="user" id="vercode" name="email" placeholder="请输入验证码"
+						 style="display:inline-block;width:65%;" required="">
+						<img id="verimg" src="http://127.0.0.1:8081/shop/user/getvercode?idx=-1" width="90" height="40" style="display:inline-block;width:33%;" onclick="changeVerImage(this)">
+					</div>
+
 					<input type="submit" value="Login" onclick="login()">
+					
 					<div class="forgot-grid">
 						<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Remember me</label>
 						<div class="forgot">

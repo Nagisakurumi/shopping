@@ -1,21 +1,68 @@
-function login(){
-    var username = $("#username").val();
-    var userpassword = $("#password").val();
-    
+﻿var veridx = 0;
 
+
+var uid = "";
+
+function changeVerImage(img){
     $.ajax({
-        type:"POST",
-        url: testUrl + "/user/login",
+        type:"GET",
+        url: testUrl + "/user/getverid",
         contentType: "application/json;charset=utf-8",
         dataType: "json",
-        data:JSON.stringify({"username": username, "password":userpassword}),
+        data:{},
         success : function (map) {
-            window.location.href = "../index.html";
+            if(map.success == true){
+                uid = map.data;
+                img.src = "http://127.0.0.1:8081/shop/user/getvercode?uid=" + uid + "idx=" + veridx;
+                veridx ++;
+            }else{
+                alert("请求验证码异常");
+            }
         },
         error :function(e){
             alert("异常");
         }
     });
+    
+}
+
+
+
+function login(){
+    $.ajax({
+        type:"GET",
+        url: testUrl + "/user/verifycode",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        data:{"key": uid, "value" : $("#vercode").val()},
+        success : function (map) {
+            if(map.success == true){
+                var username = $("#username").val();
+                var userpassword = $("#password").val();
+                
+                $.ajax({
+                    type:"POST",
+                    url: testUrl + "/user/login",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    data:JSON.stringify({"username": username, "password":userpassword}),
+                    success : function (map) {
+                        window.location.href = "../index.html";
+                    },
+                    error :function(e){
+                        alert("异常");
+                    }
+                });
+            }else{
+                alert("验证码错误");
+            }
+        },
+        error :function(e){
+            alert("异常");
+        }
+    });
+
+    
 }
 
 
@@ -35,5 +82,7 @@ window.onload = function(){
             //自己写判断函数
         }
     })
+
+    changeVerImage($("#verimg")[0])
 }
 

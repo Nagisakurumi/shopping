@@ -17,13 +17,8 @@ import java.util.Properties;
 public class shopapplication {
 
 
-    private static RedisService<Object> redisService = new RedisServiceImpl<Object>();
-
     public static void main(String [] args)
     {
         SpringApplication.run(shopapplication.class, args);
-
-        redisService.put("test", "value", -1);
-        System.out.println(redisService.get("test"));
     }
 }

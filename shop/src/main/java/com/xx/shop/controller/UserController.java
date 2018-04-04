@@ -6,8 +6,10 @@ import com.xx.shop.common.SessionHelper;
 import com.xx.shop.dto.SessionUser;
 import com.xx.shop.entity.UserInfo;
 import com.xx.shop.service.MailService;
+import com.xx.shop.service.RedisService;
 import com.xx.shop.service.UserInfoService;
 import com.xx.shop.toolspage.Encryp.MD5;
+import com.xx.shop.toolspage.VerifyCodeUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -17,13 +19,17 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/user")
@@ -42,12 +48,12 @@ public class UserController {
     private UserInfoService userInfoService;
     @Autowired
     private MailService mailService;
-
+    @Autowired
+    private RedisService redisService;
     /**
      * 用于登录接口
      * @param session
-     * @param username
-     * @param password
+     * @param userInfo
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -202,6 +208,57 @@ public class UserController {
            userInfoService.modifyPassword(username, newpassword);
            return ResultMap.getResultMap(true, "修改成功", null);
        }
+    }
+
+    /**
+     * 获取验证码id
+     * @return
+     */
+    @RequestMapping(value = "/getverid", method = RequestMethod.GET)
+    public ResultMap getVerifyCodeUid(){
+        String uid = redisService.getRandomKey();
+        return getReturnMap(true, "生成uid", uid);
+    }
+
+    /**
+     * 获取验证码接口
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "/getvercode", method = RequestMethod.GET)
+    public void getVerificationCode(HttpServletResponse response, String uid) throws IOException {
+
+        ServletOutputStream stream = response.getOutputStream();
+        int index = new Random().nextInt(uid.length() - 5);
+        String vervalue = uid.substring(index, index + 4);
+        redisService.put(uid, vervalue, 10000);
+        VerifyCodeUtils.outputImage(90, 40, stream, vervalue);
+        //return getReturnMap(true, "成功",  uid.trim());
+    }
+
+    /**
+     * 验证验证码是否正确
+     * @param value
+     * @return
+     */
+    @RequestMapping(value = "/verifycode", method = RequestMethod.GET)
+    public ResultMap getVerifyCode(String key, String value){
+        if(redisService.isKeyExists(key) == false){
+            return getReturnMap(false, "验证码已经过期，请从新获取", null);
+        }
+        if(value == redisService.get(key)){
+            return getReturnMap(true, "验证通过", null);
+        }else{
+            return getReturnMap(false, "验证失败,错误的验证码", null);
+        }
+    }
+
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public ResultMap test(){
+        redisService.put("test", "value", 10000);
+        return getReturnMap(true, "成功", redisService.get("test"));
     }
     /**
      * 获取一个用于返回的规范格式

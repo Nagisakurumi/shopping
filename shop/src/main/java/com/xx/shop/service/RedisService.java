@@ -14,24 +14,36 @@ import java.util.concurrent.TimeUnit;
  * Created by Administrator on 2017/3/1 14:57.
  */
 @Service
-public interface RedisService<T> {
+public interface RedisService {
 
     /**
-     * 存入redis中的key
+     * 存入redis中的key固定的key
      *
      * @return
      */
      public String getRedisKey();
 
     /**
+     * 获取随机的key
+     * @return
+     */
+     public String getRandomKey();
+
+    /**
      * 添加
      *
      * @param key    key
-     * @param doamin 对象
-     * @param expire 过期时间(单位:秒),传入 -1 时表示不设置过期时间
+     * @param value 对象
      */
-    public void put(String key, T doamin, long expire);
+    public void put(String key, String value);
 
+    /**
+     * 保存
+     * @param key
+     * @param value
+     * @param time
+     */
+    public void put(String key, String value, long time);
     /**
      * 删除
      *
@@ -45,14 +57,14 @@ public interface RedisService<T> {
      * @param key 查询的key
      * @return
      */
-    public T get(String key);
+    public String get(String key);
 
     /**
      * 获取当前redis库下所有对象
      *
      * @return
      */
-    public List<T> getAll();
+    public List<Object> getAll();
     /**
      * 查询查询当前redis库下所有key
      *
