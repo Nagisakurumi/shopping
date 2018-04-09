@@ -1,6 +1,7 @@
 package com.xx.shop.controller;
 
 
+import com.xx.shop.MyConfigs.WebConfig;
 import com.xx.shop.ResultModel.ResultMap;
 import com.xx.shop.common.SessionHelper;
 import com.xx.shop.dto.SessionUser;
@@ -18,18 +19,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+
+import static com.xx.shop.common.SessionHelper.userInfo;
 
 @RestController
 @RequestMapping("/user")
@@ -50,6 +52,8 @@ public class UserController {
     private MailService mailService;
     @Autowired
     private RedisService redisService;
+    @Autowired
+    private WebConfig webConfig;
     /**
      * 用于登录接口
      * @param session
@@ -78,7 +82,7 @@ public class UserController {
      */
     @RequestMapping(value = "/islogin", method = RequestMethod.GET)
     public ResultMap isLogin(HttpSession session){
-        if(session.getAttribute(SessionHelper.userInfo) == null){
+        if(session.getAttribute(userInfo) == null){
             return getReturnMap(true, "", null);
         }else{
             return getReturnMap(false, "", null);
@@ -118,7 +122,7 @@ public class UserController {
     @RequestMapping(value="/sendmail", method = RequestMethod.POST)
     public ResultMap sendMail(HttpSession session, @RequestParam("username")String username){
         String usn = null;
-        usn = (String) session.getAttribute(SessionHelper.userInfo);
+        usn = (String) session.getAttribute(userInfo);
         usn = usn == null ? username : usn;
         if(usn.equals("")){
             return getReturnMap(false, "", null);
@@ -170,6 +174,30 @@ public class UserController {
         UserInfo userInfo = userInfoService.getUserByUserName(username);
         userInfo.setPassword("*********");
         return getReturnMap(true, "", userInfo);
+    }
+
+    /**
+     * 图片上传测试
+     * @param request
+     */
+    @RequestMapping(value = "imgupload", method = RequestMethod.POST)
+    public ResultMap uploadImageTest(HttpServletRequest request) throws IOException {
+        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
+
+        for (Iterator it = multipartHttpServletRequest.getFileNames(); it.hasNext(
+        );) {
+            String key = (String) it.next();
+            MultipartFile file = multipartHttpServletRequest.getFile(key);
+            String newfilename = webConfig.getUploadpath().concat("test.jpg");
+            //封装处理文件工具类Tools
+            File newfile = new File(newfilename);
+            file.transferTo(newfile);
+            file = null;
+            newfile = null;
+
+            return getReturnMap(true, "成功", null);
+        }
+        return getReturnMap(false, "失败", null);
     }
 
     /**

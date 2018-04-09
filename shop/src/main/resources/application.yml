@@ -19,7 +19,7 @@ spring:
 
 web:
   config:
-    uploadpath: classpath:/resources/
+    uploadpath: X://images//
 
 server:
   port: 8081
